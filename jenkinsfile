@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Get the source code from your Git repository
-                git 'https://github.com/yourusername/helloworld.git'
+                git 'https://github.com/vishnulink/SampleJenkinsProject.git'
             }
         }
         
@@ -14,7 +14,7 @@ pipeline {
                 script {
                     // Ensure Java is available on the Jenkins machine
                     // Use the Java 11 (or a specific version as needed)
-                    sh 'javac HelloWorld.java'  // Compile the Java program
+                    sh 'javac Helloworld.java'  // Compile the Java program
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Run the compiled Java program
-                    sh 'java HelloWorld'  // Run the HelloWorld program
+                    sh 'java Helloworld'  // Run the HelloWorld program
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     // Optionally, you can clean up the workspace after the job is done
-                    sh 'rm -f HelloWorld.class'
+                    sh 'rm -f Helloworld.class'
                 }
             }
         }
