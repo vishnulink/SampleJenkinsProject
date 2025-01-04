@@ -1,0 +1,57 @@
+pipeline {
+    agent any  // Run the pipeline on any available agent
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Get the source code from your Git repository
+                git 'https://github.com/yourusername/helloworld.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                script {
+                    // Ensure Java is available on the Jenkins machine
+                    // Use the Java 11 (or a specific version as needed)
+                    sh 'javac HelloWorld.java'  // Compile the Java program
+                }
+            }
+        }
+        
+        stage('Run') {
+            steps {
+                script {
+                    // Run the compiled Java program
+                    sh 'java HelloWorld'  // Run the HelloWorld program
+                }
+            }
+        }
+        
+        stage('Clean Up') {
+            steps {
+                script {
+                    // Optionally, you can clean up the workspace after the job is done
+                    sh 'rm -f HelloWorld.class'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Always execute these steps (e.g., clean up resources)
+            echo 'Cleaning up after the build.'
+        }
+        
+        success {
+            // Actions when the build succeeds
+            echo 'Build and execution successful!'
+        }
+        
+        failure {
+            // Actions when the build fails
+            echo 'Build failed. Please check the logs.'
+        }
+    }
+}
